@@ -1,3 +1,4 @@
+import API_URL from "./config.js";
 const searchBtn = document.getElementById("searchBtn");
 const pokemonNameInput = document.getElementById("pokemonName");
 const card = document.getElementById("pokemon-card");
@@ -13,7 +14,7 @@ searchBtn.addEventListener("click", async () => {
 
   try {
     // 🔹 Consumimos tu endpoint del backend
-    const res = await fetch(`http://localhost:3000/api/pokemon/${pokemonName}`);
+    const res = await fetch(`${API_URL}/api/pokemon/${pokemonName}`);
     if (!res.ok) throw new Error("Pokémon no encontrado");
     const pokemon = await res.json();
 
