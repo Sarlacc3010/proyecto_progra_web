@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PokeSearch</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pokédex</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>🔍 Buscar Pokémon</h1>
+  <main class="container">
+    <h1 class="title">🔍 Pokédex Interactiva</h1>
 
-  <div class="search-container">
-    <input type="text" id="pokemonName" placeholder="Escribe el nombre o número">
-    <button id="searchBtn">Buscar</button>
-  </div>
+    <div class="search-box">
+      <input id="pokemonName" type="text" placeholder="Escribe el nombre o número del Pokémon..." />
+      <button id="searchBtn">Buscar</button>
+    </div>
 
-  <div id="pokemon-card" class="pokemon-card hidden"></div>
+    <div id="pokemon-card" class="pokemon-card hidden"></div>
+  </main>
+
+  <footer>
+    <p>Hecho con ❤️ usando <a href="https://pokeapi.co/" target="_blank">PokéAPI</a></p>
+  </footer>
 
   <script type="module" src="script.js"></script>
 </body>

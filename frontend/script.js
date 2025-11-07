@@ -1,48 +1,44 @@
 import API_URL from "./config.js";
+
 const searchBtn = document.getElementById("searchBtn");
 const pokemonNameInput = document.getElementById("pokemonName");
-const card = document.getElementById("pokemon-card");
+const cardInner = document.querySelector(".card-inner");
+const cardFront = document.querySelector(".card-front");
+const cardBack = document.querySelector(".card-back");
 
 searchBtn.addEventListener("click", async () => {
   const pokemonName = pokemonNameInput.value.trim().toLowerCase();
 
   if (!pokemonName) {
-    card.innerHTML = `<p class="error">Por favor, escribe un nombre o número.</p>`;
-    card.classList.remove("hidden");
+    showError("Por favor, escribe un nombre o número.");
     return;
   }
 
   try {
-    // 🔹 Consumimos tu endpoint del backend
     const res = await fetch(`${API_URL}/api/pokemon/${pokemonName}`);
     if (!res.ok) throw new Error("Pokémon no encontrado");
-    const pokemon = await res.json();
+    const data = await res.json();
 
-    // 🔹 Mostramos el resultado
-    showPokemon(pokemon);
+    showPokemon(data);
   } catch (error) {
-    card.innerHTML = `<p class="error">❌ Pokémon no encontrado</p>`;
-    card.classList.remove("hidden");
+    showError("❌ Pokémon no encontrado");
   }
 });
 
 function showPokemon(pokemon) {
-  const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
-  const id = pokemon.id.toString().padStart(3, "0");
-  const type = pokemon.type.join(", ");
-  const image = pokemon.image;
-  const description = pokemon.description;
-
-  card.innerHTML = `
-    <div class="pokemon-image">
-      <img src="${image}" alt="${name}">
-    </div>
-    <div class="pokemon-info">
-      <h2>${name} (#${id})</h2>
-      <p><strong>Tipo:</strong> ${type}</p>
-      <p><strong>Descripción:</strong> ${description}</p>
-    </div>
+  cardFront.innerHTML = `
+    <img src="${pokemon.image}" alt="${pokemon.name}" />
+    <h2>${pokemon.name.toUpperCase()}</h2>
+    <p><strong>Tipo:</strong> ${pokemon.type.join(", ")}</p>
   `;
 
-  card.classList.remove("hidden");
+  cardBack.innerHTML = `
+    <h3>Descripción</h3>
+    <p>${pokemon.description}</p>
+  `;
+}
+
+function showError(message) {
+  cardFront.innerHTML = `<p class="error">${message}</p>`;
+  cardBack.innerHTML = `<p>Intenta con otro nombre o número.</p>`;
 }
