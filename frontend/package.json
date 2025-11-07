@@ -1,0 +1,8 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "Frontend estático del proyecto",
+  "scripts": {
+    "start": "echo 'Static site, no build step required'"
+  }
+}
